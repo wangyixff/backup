@@ -1,0 +1,22 @@
+{% extends "main.html" %}
+{% block content %}
+
+<h1> New Item </h1>
+
+<form action="{{url_for('newitem', category_id=category_id, category = category )}}" method = 'POST'>
+
+        <p>Name:</p>
+		<input type ='text' size='30' name='name' required>
+	<p>Description:</p>
+		<input type ='text' size='30' name='description'>
+	<p>Category Name</p>
+		<input type ='text' size='30' name='category_name', value = "{{category.name}}" required> 
+	
+	</br>
+
+
+<input type='submit' value='Create'>
+
+</form>
+
+{% endblock %}

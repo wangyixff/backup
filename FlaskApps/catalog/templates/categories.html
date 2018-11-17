@@ -1,0 +1,35 @@
+{% extends "main.html" %}
+{% block content %}
+<div class="content">
+  <div class = 'left'>
+    <h1>Categories</h1>
+      {% if session.username %}
+      <a href="{{url_for('newCategory')}}" > <h3> Create a Category </h3> </a>
+      {% endif %}
+
+      {% for category in categories %}
+      {% if session.username %}
+      <p ><a style="color:rgb(168, 33, 33);" href = "{{url_for('categoryitem',category_id = category.id)}}">{{category.name}}</a></p>
+
+      <a href="{{url_for('editcategory',category_id = category.id)}}">
+          <button>Edit</button>
+      </a>
+      <a href="{{url_for('deletecategory',category_id = category.id)}}">
+        <button>Delete</button>
+      </a>
+
+      {% else %}
+      <p ><a style="color: rgb(168, 33, 33);" href = "{{url_for('categoryitem',category_id = category.id)}}">{{category.name}}</a></p>
+      {% endif %}
+
+      {% endfor %}
+  </div>
+
+  <div class = 'right'>
+    <h1>Latest Items</h1>
+    {% for item in items %}
+      <p><a href = "{{url_for('showitemdescription', category_id = item.category_id, item_id=item.id)}}">{{item.name}} ({{item.category_name}})</a></p>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
